@@ -16,13 +16,27 @@ def six_digit_check(number):
 
 
 def double_digit_check(number):
-    retval = False
+    pair_counter = 0
+    pair_check = False
+    last_pair_check = False
+
 
     for digit in range(1, 6):
         if number[digit - 1] == number[digit]:
-            retval = True
+            current_pair_check = True
+        else:
+            current_pair_check = False
 
-    return retval
+        if not last_pair_check and current_pair_check:
+            pair_check = True
+        elif last_pair_check and current_pair_check:
+            pair_check = False
+        elif last_pair_check and not current_pair_check and pair_check:
+            break
+
+        last_pair_check = current_pair_check
+
+    return pair_check
 
 def increase_check(number):
     retval = True
